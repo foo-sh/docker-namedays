@@ -4,7 +4,7 @@ import json
 import logging
 
 from datetime import datetime
-from flask import Flask, abort, jsonify, request
+from flask import Flask, abort, jsonify
 from werkzeug.exceptions import HTTPException
 
 
