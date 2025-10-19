@@ -12,8 +12,6 @@ jobs:
   ruff:
     runs-on: ubuntu-latest
     timeout-minutes: 5
-    needs:
-      - versioncheck
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
