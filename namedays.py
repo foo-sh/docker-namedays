@@ -60,9 +60,9 @@ def handler(isodate):
         isodate = datetime.now()
     else:
         try:
-            isodate = datetime.strptime(query, "%Y-%m-%d")
+            isodate = datetime.strptime(isodate, "%Y-%m-%d")
         except ValueError:
-            api.logger.warning("Invalid date {}".format(repr(query)))
+            api.logger.warning("Invalid date {}".format(repr(isodate)))
             abort(400)
     return jsonify(fetch_data(isodate))
 
