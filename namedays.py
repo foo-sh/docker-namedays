@@ -21,16 +21,7 @@ api = API(__name__)
 
 
 @functools.cache
-def fetch_data(query=None):
-    if query is None:
-        query = datetime.now()
-    else:
-        try:
-            query = datetime.strptime(query, "%Y-%m-%d")
-        except ValueError:
-            api.logger.warning("Invalid date {}".format(repr(query)))
-            abort(400)
-
+def fetch_data(query):
     day = query.strftime("%d")
     month = query.strftime("%m")
     req = httpx.post(
@@ -65,6 +56,14 @@ def fetch_data(query=None):
 @api.route("/", defaults={"isodate": None}, methods=["GET"])
 @api.route("/<isodate>", methods=["GET"])
 def handler(isodate):
+    if isodate is None:
+        isodate = datetime.now()
+    else:
+        try:
+            isodate = datetime.strptime(query, "%Y-%m-%d")
+        except ValueError:
+            api.logger.warning("Invalid date {}".format(repr(query)))
+            abort(400)
     return jsonify(fetch_data(isodate))
 
 
